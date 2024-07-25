@@ -261,7 +261,7 @@ class Octree:
         compared_pairs = set()
         for curr_A in nodes_A:
             for curr_B in nodes_B:
-                if self.any_path(curr_A, curr_B, directions, compared_pairs) != None:
+                if self.any_path(curr_A, curr_B, directions, compared_pairs):
                     return True
         return False
     
@@ -342,7 +342,7 @@ class Octree:
         self.prev_node = None
         self.f = float('inf')
         self.g = float('inf')
-        self.h = 0
+        self.h = -1
         self.visited = False
 
         for child in self.children:
@@ -389,7 +389,7 @@ class Octree:
         search_start = True
         start_node.f = 0
         start_node.g = 0
-        start_node.h = 0
+        start_node.h = -1
         start_node.prev_node = start_node
         open_list = []
         heapq.heappush(open_list, (0.0, start_node.layer_indexes))
@@ -444,7 +444,7 @@ class Octree:
                                     root.reset_layer_pathfinding_data(expected_layers)
                                     start_node.f = 0
                                     start_node.g = 0
-                                    start_node.h = 0
+                                    start_node.h = -1
                                     start_node.prev_node = start_node
                                     open_list = []
                                     heapq.heappush(open_list, (0.0, start_node.layer_indexes))
